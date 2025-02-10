@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import HomeScreen from './screens/HomeScreen';
+// import EventScreen from './screens/EventScreen';
+// import FastOrderScreen from './screens/FastOrderScreen';
+// import GiftShopScreen from './screens/GiftShopScreen';
+// import CGVScreen from './screens/CGVScreen';
+import MenuScreen from './screens/MenuScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Stack = createStackNavigator();
+
+const App = () => {
+    return (
+        <SafeAreaProvider>
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen 
+                        name="Main" 
+                        component={HomeScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen 
+                        name="Menu" 
+                        component={MenuScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </SafeAreaProvider>
+    );
+};
+
+export default App;
