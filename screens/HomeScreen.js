@@ -89,6 +89,7 @@ const HomeScreen = ({ navigation }) => {
             </ScrollView>
 
             <TouchableOpacity style={styles.ticketingButton}>
+                <Image source={require('../assets/ticket-icon.png')} style={styles.ticketIcon} />
                 <Text style={styles.ticketingButtonText}>예매하기</Text>
             </TouchableOpacity>
         </SafeAreaView>
@@ -271,15 +272,33 @@ const styles = StyleSheet.create({
     ticketingButton: {
         backgroundColor: '#FF4B4B',
         padding: 15,
-        margin: 15,
-        borderRadius: 8,
-        alignItems: 'flex-end',
+        position: 'absolute',
+        bottom: 20,
+        right: 15,
+        borderRadius: 25,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        elevation: 5, 
+        shadowColor: '#000', 
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     },
     ticketingButtonText: {
         color: '#fff',
         fontSize: 16,
         fontWeight: 'bold',
+        marginLeft: 5,
     },
+    ticketIcon: {
+        width: 20,
+        height: 20,
+        tintColor: '#fff',
+    }
 });
 
 export default HomeScreen;
