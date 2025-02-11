@@ -62,7 +62,7 @@ const MenuScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
           <Text style={styles.loginText}>로그인을 해주세요</Text>
           <MaterialIcons name="chevron-right" size={24} color="#fff" />
         </TouchableOpacity>

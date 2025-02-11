@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import HomeScreen from './screens/HomeScreen';
 import MenuScreen from './screens/MenuScreen';
+import LoginScreen from './screens/LoginScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,13 @@ const App = () => {
                     <Stack.Screen 
                         name="Menu" 
                         component={MenuScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen 
+                        name="Login" 
+                        component={LoginScreen}
                         options={{
                             headerShown: false
                         }}
