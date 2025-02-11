@@ -55,7 +55,7 @@ const MenuScreen = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.headerIcon}
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate('Main')}
             >
               <MaterialCommunityIcons name="close" size={24} color="#fff" />
             </TouchableOpacity>

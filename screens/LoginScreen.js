@@ -4,13 +4,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
 
             <View style={styles.header}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
                     <Icon name="chevron-left" size={30} color="#000" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>로그인</Text>
