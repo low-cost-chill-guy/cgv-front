@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity, StatusBar, Image, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const LoginScreen = ({ navigation }) => {
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
@@ -30,11 +31,20 @@ const LoginScreen = ({ navigation }) => {
             <View style={styles.loginFields}>
                 <View style={styles.inputField}>
                     <Icon name="account-outline" size={24} color="#888" />
-                    <Text style={styles.inputText}>CJ ONE 통합 아이디 6~12자</Text>
+                    <TextInput
+                        style={[styles.inputField, { borderBottomWidth: 0 }]}
+                        placeholder="CJ ONE 통합 아이디 6~12자"
+                        placeholderTextColor="#888"
+                    />
                 </View>
                 <View style={styles.inputField}>
                     <Icon name="lock-outline" size={24} color="#888" />
-                    <Text style={styles.inputText}>영문+숫자+특수문자 6~12자</Text>
+                    <TextInput
+                        style={[styles.inputField, { borderBottomWidth: 0 }]}
+                        secureTextEntry={true}
+                        placeholder="영문+숫자+특수문자 6~12자"
+                        placeholderTextColor="#888"
+                    />
                 </View>
                 <View style={styles.autoLoginContainer}>
                     <Icon name="check-circle" size={24} color="#FF4B4B" />
@@ -42,14 +52,16 @@ const LoginScreen = ({ navigation }) => {
                 </View>
             </View>
 
-            <LinearGradient
-                colors={['#FF4B4B', '#FF8E4B']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.loginButton}
-            >
-                <Text style={styles.loginButtonText}>로그인</Text>
-            </LinearGradient>
+            <TouchableOpacity onPress={() => navigation.navigate('MyPage')}>
+                <LinearGradient
+                    colors={['#FF4B4B', '#FF8E4B']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.loginButton}
+                >
+                    <Text style={styles.loginButtonText}>로그인</Text>
+                </LinearGradient>
+            </TouchableOpacity>
 
             <View style={styles.optionsContainer}>
                 <Text style={styles.optionText}>아이디찾기</Text>
@@ -105,8 +117,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        width: 100,  
-        height: 100,  
+        width: 100,
+        height: 100,
     },
     loginFields: {
         paddingHorizontal: 20,
@@ -114,7 +126,7 @@ const styles = StyleSheet.create({
     inputField: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: 15,
+        paddingVertical: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#E5E5E5',
     },

@@ -6,6 +6,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import HomeScreen from './screens/HomeScreen';
 import MenuScreen from './screens/MenuScreen';
 import LoginScreen from './screens/LoginScreen';
+import MyPageScreen from './screens/MyPageScreen'
+import MyTicket from './screens/MyTicket'
 
 const Stack = createStackNavigator();
 
@@ -14,27 +16,40 @@ const App = () => {
         <SafeAreaProvider>
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen 
-                        name="Main" 
+                    <Stack.Screen
+                        name="Main"
                         component={HomeScreen}
                         options={{
                             headerShown: false
                         }}
                     />
-                    <Stack.Screen 
-                        name="Menu" 
+                    <Stack.Screen
+                        name="Menu"
                         component={MenuScreen}
                         options={{
                             headerShown: false
                         }}
                     />
-                    <Stack.Screen 
-                        name="Login" 
+                    <Stack.Screen
+                        name="Login"
                         component={LoginScreen}
                         options={{
                             headerShown: false
                         }}
                     />
+                    <Stack.Screen
+                        name="MyPage"
+                        component={MyPageScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="MyTicket"
+                        component={MyTicket}
+                        options={{
+                            headerShown: false
+                        }} />
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
