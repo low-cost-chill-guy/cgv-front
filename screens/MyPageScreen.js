@@ -121,6 +121,11 @@ const MyPageScreen = ({ navigation }) => {
                             onPress={() => navigation.navigate('MyTicket')}
                         />
                         <MenuItem
+                            icon={<MaterialIcons name="local-movies" size={24} color="#666" />}
+                            title="VIP 시사회"
+                            onPress={() => navigation.navigate('StreamPlayer')}
+                        />
+                        <MenuItem
                             icon={<MaterialIcons name="payment" size={24} color="#666" />}
                             title="CGV 스마트 결제 관리"
                         />
