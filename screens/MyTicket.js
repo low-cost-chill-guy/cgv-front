@@ -25,7 +25,7 @@ const MyTicket = () => {
     const fetchTickets = async () => {
       try {
         //Server Url로 변경하기 
-        const response = await fetch("http://172.20.10.11:8000/tickets/user/1");
+        const response = await fetch("http://k8s-cgvapp-karpente-18ab730259-222315430.ap-northeast-2.elb.amazonaws.com:8000/tickets/user/1");
         const data = await response.json();
         console.log("티켓 데이터:", data); // 추가된 로그
         setTickets(data);
