@@ -55,9 +55,9 @@ const App = () => {
                         name="StreamPlayer"
                         component={RTMPPlayerScreen}
                         options={{
-                            headerShown: false,  // 헤더 숨기기
-                            orientation: 'landscape',  // 가로 모드 설정 (선택사항)
-                            gestureEnabled: false,  // 뒤로가기 제스처 비활성화 (선택사항)
+                            headerShown: false, 
+                            orientation: 'landscape',
+                            gestureEnabled: false,
                         }}
                     />
                 </Stack.Navigator>
