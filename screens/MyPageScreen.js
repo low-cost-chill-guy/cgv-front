@@ -58,7 +58,7 @@ const MyPageScreen = ({ navigation }) => {
                 <View style={styles.profileSection}>
                     <View style={styles.profileInfo}>
                         <View>
-                            <Text style={styles.userName}>ok**3945님</Text>
+                            <Text style={styles.userName}>yh**ka님</Text>
                             <Text style={styles.greeting}>안녕하세요.</Text>
                         </View>
                         <View style={styles.profileImagePlaceholder}>

@@ -9,6 +9,8 @@ import LoginScreen from './screens/LoginScreen';
 import MyPageScreen from './screens/MyPageScreen'
 import MyTicket from './screens/MyTicket'
 import RTMPPlayerScreen from './screens/RTMPPlayerScreen';
+import HomeScreenDR from './screens/HomeScreenDR';
+import NotFoundScreen from './screens/NotFoundScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,10 +18,24 @@ const App = () => {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator initialRouteName='MainDR'>
                     <Stack.Screen
                         name="Main"
                         component={HomeScreen}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="MainDR"
+                        component={HomeScreenDR}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="NotFound"
+                        component={NotFoundScreen}
                         options={{
                             headerShown: false
                         }}

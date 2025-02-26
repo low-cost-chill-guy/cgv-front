@@ -24,22 +24,22 @@ const MyTicket = ({ navigation }) => {
   // 광고 길이(초 단위) - 실제 광고 길이에 맞게 조정 필요
   const AD_DURATION = 300; // 5분 (예시)
 
-  // 남은 시간 계산 함수 - date와 time 필드를 조합하여 사용
-  // 남은 시간 계산 함수 - date와 time 필드를 조합하여 사용
+  // 남은 시간 계산 함수 수정 - (상영시작시간 + 광고길이) - 현재시간
   const calculateRemainingTime = (date, time) => {
     // date와 time을 조합하여 영화 시작 시간 생성
     const movieStartTimeStr = `${date} ${time}`;
     const movieStartMoment = moment(movieStartTimeStr, "YYYY.MM.DD HH:mm");
-    const movieStartWithAd = movieStartMoment.clone().subtract(AD_DURATION, 'seconds');
+    // 상영 시작 시간 + 광고 길이를 합친 전체 시간
+    const totalTime = movieStartMoment.clone().add(AD_DURATION, 'seconds');
     const now = moment();
 
     // 이미 지난 상영인 경우
-    if (movieStartMoment < now) {
+    if (totalTime < now) {
       return "상영 시간이 지났습니다";
     }
 
     // 남은 시간 계산
-    const duration = moment.duration(movieStartMoment.diff(now));
+    const duration = moment.duration(totalTime.diff(now));
     const hours = Math.floor(duration.asHours());
     const minutes = Math.floor(duration.asMinutes()) % 60;
     const seconds = Math.floor(duration.asSeconds()) % 60;
@@ -56,15 +56,21 @@ const MyTicket = ({ navigation }) => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        //Server Url로 변경하기 
         const response = await fetch("http://k8s-cgvapp-karpente-18ab730259-222315430.ap-northeast-2.elb.amazonaws.com:8000/tickets/user/1");
         const data = await response.json();
         console.log("티켓 데이터:", data);
-        setTickets(data);
 
-        // 초기 남은 시간 계산
+        // Check if data is an error object
+        if (data.error) {
+          console.error("서버 오류:", data.error);
+          setTickets([]); // Set empty array to avoid crashes
+        } else {
+          setTickets(Array.isArray(data) ? data : [data]); // Ensure it's an array
+        }
+
+        // Initialize remaining times only if we have tickets
         const initialRemainingTimes = {};
-        data.forEach(ticket => {
+        (Array.isArray(data) ? data : [data]).forEach(ticket => {
           if (ticket.date && ticket.time) {
             initialRemainingTimes[ticket.ticketNumber] = calculateRemainingTime(ticket.date, ticket.time);
           }
@@ -72,6 +78,7 @@ const MyTicket = ({ navigation }) => {
         setRemainingTimes(initialRemainingTimes);
       } catch (error) {
         console.error("티켓 정보를 불러오는 중 오류 발생:", error);
+        setTickets([]); // Set empty array to avoid crashes
       } finally {
         setLoading(false);
       }
@@ -146,13 +153,14 @@ const MyTicket = ({ navigation }) => {
               </View>
               <View style={styles.infoRow}>
                 <Text style={styles.label}>광고 시간</Text>
+                <Text style={styles.value}>5:00</Text>
               </View>
             </View>
 
             {/* 광고 섹션 */}
             {ticket.adUrl ? (
               <View style={styles.adContainer}>
-                <Text style={styles.adTitle}> 📢 광고 ({Math.floor(AD_DURATION / 60)}분)</Text>
+                <Text style={styles.adTitle}> 📢 광고</Text>
                 <Video
                   ref={videoRef}
                   source={{ uri: ticket.adUrl }}
@@ -166,7 +174,7 @@ const MyTicket = ({ navigation }) => {
               </View>
             ) : null}
 
-            <Text style={styles.text}>🎬 상영까지 남은 시간 </Text>
+            <Text style={styles.text}>🎬 총 관람 시간까지 남은 시간 </Text>
             <Text style={styles.remainingTime}>
               {ticket.ticketNumber && remainingTimes[ticket.ticketNumber] ?
                 remainingTimes[ticket.ticketNumber] :
